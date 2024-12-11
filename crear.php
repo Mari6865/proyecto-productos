@@ -3,19 +3,19 @@ crear.php
 require_once 'conexion.php';
 
 // Obtener familias de productos
-$query = "SELECT id, nombre FROM familias";
+$query = "SELECT cod, nombre FROM familias";
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $familias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recoger datos del formulario
-    $codigo = $_POST['codigo'];
+    $codigo = $_POST['cod'];
     $nombre = $_POST['nombre'];
     $familia_id = $_POST['familia'];
 
     // Insertar el producto
-    $query = "INSERT INTO productos (codigo, nombre, familia_id) VALUES (?, ?, ?)";
+    $query = "INSERT INTO productos (cod, nombre, familia_id) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$codigo, $nombre, $familia_id]);
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="familia" class="form-label">Familia</label>
             <select name="familia" class="form-select" required>
                 <?php foreach ($familias as $familia): ?>
-                    <option value="<?php echo $familia['id']; ?>"><?php echo $familia['nombre']; ?></option>
+                    <option value="<?php echo $familia['cod']; ?>"><?php echo $familia['nombre']; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

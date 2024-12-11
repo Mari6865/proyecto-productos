@@ -10,7 +10,7 @@ if (!isset($_GET['id'])) {
 $id = $_GET['id'];
 
 // Obtener detalles del producto
-$query = "SELECT p.id, p.codigo, p.nombre, f.nombre AS familia FROM productos p JOIN familias f ON p.familia_id = f.id WHERE p.id = ?";
+$query = "SELECT p.id,  p.nombre, f.nombre AS familia FROM productos p JOIN familias f ON p.familia = f.cod WHERE p.id = ?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$id]);
 $producto = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -31,7 +31,7 @@ if (!$producto) {
 <body>
 <div class="container mt-5">
     <h1>Detalle del Producto</h1>
-    <p><strong>Código:</strong> <?php echo htmlspecialchars($producto['codigo']); ?></p>
+    <p><strong>Código:</strong> <?php echo htmlspecialchars($producto['id']); ?></p>
     <p><strong>Nombre:</strong> <?php echo htmlspecialchars($producto['nombre']); ?></p>
     <p><strong>Familia:</strong> <?php echo htmlspecialchars($producto['familia']); ?></p>
     <a href="listado.php" class="btn btn-secondary">Volver al Listado</a>

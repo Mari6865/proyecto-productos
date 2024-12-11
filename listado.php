@@ -3,7 +3,7 @@ listado.php
 require_once 'conexion.php';
 
 // Obtener productos
-$query = "SELECT id, codigo, nombre FROM productos";
+$query = "SELECT id, nombre FROM productos";
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,7 +31,7 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tbody>
             <?php foreach ($productos as $producto): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($producto['codigo']); ?></td>
+                    <td><?php echo htmlspecialchars($producto['id']); ?></td>
                     <td><?php echo htmlspecialchars($producto['nombre']); ?></td>
                     <td>
                         <a href="detalle.php?id=<?php echo $producto['id']; ?>" class="btn btn-info btn-sm">Ver</a>

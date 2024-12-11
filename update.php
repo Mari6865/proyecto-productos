@@ -21,7 +21,7 @@ if (!$producto) {
 }
 
 // Obtener familias
-$query_familias = "SELECT id, nombre FROM familias";
+$query_familias = "SELECT cod, nombre FROM familias";
 $stmt_familias = $pdo->prepare($query_familias);
 $stmt_familias->execute();
 $familias = $stmt_familias->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $familia_id = $_POST['familia'];
 
     // Actualizar producto
-    $query_update = "UPDATE productos SET codigo = ?, nombre = ?, familia_id = ? WHERE id = ?";
+    $query_update = "UPDATE productos SET codigo = ?, nombre = ?, familia = ? WHERE id = ?";
     $stmt_update = $pdo->prepare($query_update);
     $stmt_update->execute([$codigo, $nombre, $familia_id, $id]);
 
